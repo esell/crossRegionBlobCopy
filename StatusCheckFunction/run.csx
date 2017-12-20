@@ -30,7 +30,7 @@ public static void Run(TimerInfo myTimer, TraceWriter log)
         // Create the table client.
         CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-        // Create the CloudTable object that represents the "people" table.
+        // Create the CloudTable object that represents the table.
         CloudTable table = tableClient.GetTableReference("outTable");
 
         // Create the table query.
