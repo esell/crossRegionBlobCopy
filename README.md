@@ -10,7 +10,7 @@ production ready "app". This is just a PoC/demo on how you might solve this with
 Additionally, take note that this is what happens when you ask a go person to write C#.
 
 
-## [[Process]]
+## Process
 
 The process is fairly simple and is meant to use as many PaaS services as possible to avoid management overhead. The idea was to keep things as simple as possible, hence
 the use of Azure Table Storage vs something like Azure SQL.
