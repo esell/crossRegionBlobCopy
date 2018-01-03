@@ -10,7 +10,7 @@ production ready "app". This is just a PoC/demo on how you might solve this with
 Additionally, take note that this is what happens when you ask a go person to write C#.
 
 
-## Process
+## [[Process]]
 
 The process is fairly simple and is meant to use as many PaaS services as possible to avoid management overhead. The idea was to keep things as simple as possible, hence
 the use of Azure Table Storage vs something like Azure SQL.
@@ -18,6 +18,9 @@ the use of Azure Table Storage vs something like Azure SQL.
 The copy function simply runs on a set schedule and takes all of the blobs from one storage container and begins the copy process to another container. This is an async
 process so understand that this function is simply starting the copy process, not following it through to completion. Each copy process is entered into an Azure table store
 with a status of "PENDING".
+
+Alternatively, there is a snapshot function that will take a snapshot of an existing vhd and then copy it over. This solves the issues of trying to acquire a lease on a
+vhd that is currently in-use (a running system).
 
 The status function runs on a timer as well and is responsible for checking the status of the copy process. It will look at the Azure table store for any "jobs" that are
 in a "PENDING" state and then query them to get their current status. If they are complete then the table is updated to reflect that. If they are still in progress a 
