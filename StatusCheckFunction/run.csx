@@ -34,7 +34,11 @@ public static void Run(TimerInfo myTimer, TraceWriter log)
         CloudTable table = tableClient.GetTableReference("outTable");
 
         // Create the table query.
-        TableQuery<BlobBackupEntity> query = new TableQuery<BlobBackupEntity>().Where(TableQuery.GenerateFilterCondition("Status", QueryComparisons.Equal, "PENDING"));
+        TableQuery<BlobBackupEntity> query = new TableQuery<BlobBackupEntity>().Where(
+            TableQuery.CombineFilters(
+                TableQuery.GenerateFilterCondition("Status", QueryComparisons.Equal, "PENDING"),
+                TableOperators.And,
+                TableQuery.GenerateFilterCondition("Container", QueryComparisons.Equal, destContainer.Name)));
   
         // Loop through the results, displaying information about the entity.
         foreach (BlobBackupEntity entity in table.ExecuteQuery(query))
@@ -90,5 +94,6 @@ public class BlobBackupEntity : TableEntity
 {
     public BlobBackupEntity() { }
     public string Name { get; set; }
+    public string Container { get; set; }
     public string Status { get; set; }
 }

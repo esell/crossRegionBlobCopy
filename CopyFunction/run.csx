@@ -56,6 +56,7 @@ public static void Run(TimerInfo myTimer, ICollector<BlobBackup> outputTable, Tr
                 PartitionKey = "Test", 
                 RowKey = blob.Name + "_" + DateTime.UtcNow.ToString("yyyyMMddHHmmssfff"), 
                 Name = blob.Name,
+                Container = destContainer.Name,
                 Status = "PENDING" }
             );
         }
@@ -71,5 +72,6 @@ public class BlobBackup
     public string PartitionKey { get; set; }
     public string RowKey { get; set; }
     public string Name { get; set; }
+    public string Container { get; set; }
     public string Status { get; set; }
 }
