@@ -56,6 +56,7 @@ public static void Run(TimerInfo myTimer, TraceWriter log)
                     // Create a retrieve operation that takes a customer entity.
                     List<string> columnList = new List<string>();
                     columnList.Add("Name");
+                    columnList.Add("Container");
                     TableOperation retrieveOperation = TableOperation.Retrieve<BlobBackupEntity>(entity.PartitionKey, entity.RowKey, columnList);
 
                     // Execute the operation.
